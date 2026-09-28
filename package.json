@@ -1,0 +1,17 @@
+{
+  "name": "ecocommute",
+  "version": "1.0.0",
+  "description": "EcoCommute - log green commutes, see CO2 saved, compete on the leaderboard",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node --no-warnings server/server.js",
+    "seed": "node --no-warnings server/seed.js --reset"
+  },
+  "engines": { "node": ">=22.5" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

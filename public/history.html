@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trip History · EcoCommute</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="history">
+  <div id="navbar"></div>
+
+  <main class="container pb-4">
+    <div class="page-header d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <div>
+        <h1><i class="bi bi-clock-history me-2"></i>Trip history</h1>
+        <p class="text-muted mb-0">Every green trip you've logged.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary" id="exportBtn"><i class="bi bi-download me-1"></i>Export CSV</button>
+        <a href="log-trip.html" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Log trip</a>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="eco-card p-3 mb-3">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label small text-muted mb-1" for="fMode">Mode</label>
+          <select class="form-select" id="fMode"><option value="">All modes</option></select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label small text-muted mb-1" for="fMonth">Month</label>
+          <select class="form-select" id="fMonth"><option value="">All months</option></select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label small text-muted mb-1" for="fSearch">Search notes</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+            <input type="search" class="form-control" id="fSearch" placeholder="e.g. college">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-light w-100" id="fReset"><i class="bi bi-x-circle me-1"></i>Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary chips -->
+    <div class="row g-3 mb-3" id="summary">
+      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Trips</div><div class="fs-4 fw-bold" id="sTrips">–</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Distance</div><div class="fs-4 fw-bold" id="sKm">–</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">CO₂ saved</div><div class="fs-4 fw-bold text-success" id="sCo2">–</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Points</div><div class="fs-4 fw-bold" id="sPts">–</div></div></div>
+    </div>
+
+    <div class="eco-card overflow-hidden">
+      <div class="table-responsive">
+        <table class="table eco-table">
+          <thead>
+            <tr><th>Date</th><th>Mode</th><th>Distance</th><th>People</th><th>CO₂ saved</th><th>Points</th><th>Note</th><th></th></tr>
+          </thead>
+          <tbody id="tripBody">
+            <tr><td colspan="8"><div class="skeleton" style="height:200px"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-between align-items-center p-3 border-top small text-muted" id="pager"></div>
+    </div>
+  </main>
+
+  <!-- Delete confirmation -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content p-4 text-center">
+        <div class="fs-1 mb-2">🗑️</div>
+        <h5 class="fw-bold">Delete this trip?</h5>
+        <p class="text-muted small mb-3" id="deleteText"></p>
+        <div class="d-flex gap-2">
+          <button class="btn btn-light flex-fill" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger flex-fill" id="confirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/co2.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/history.js"></script>
+</body>
+</html>

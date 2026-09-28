@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboard · EcoCommute</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="leaderboard">
+  <div id="navbar"></div>
+
+  <main class="container pb-4">
+    <div class="page-header text-center">
+      <h1><i class="bi bi-trophy me-2"></i>Leaderboard</h1>
+      <p class="text-muted">Who's making the biggest difference? Every green trip moves you up.</p>
+
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+        <div class="btn-group" role="group" aria-label="Metric">
+          <input type="radio" class="btn-check" name="metric" id="mCo2" value="co2" checked>
+          <label class="btn btn-outline-primary" for="mCo2"><i class="bi bi-cloud-check me-1"></i>CO₂ saved</label>
+          <input type="radio" class="btn-check" name="metric" id="mScore" value="score">
+          <label class="btn btn-outline-primary" for="mScore"><i class="bi bi-star me-1"></i>Score</label>
+        </div>
+        <div class="btn-group" role="group" aria-label="Period">
+          <input type="radio" class="btn-check" name="period" id="pAll" value="all" checked>
+          <label class="btn btn-outline-primary" for="pAll">All time</label>
+          <input type="radio" class="btn-check" name="period" id="pMonth" value="month">
+          <label class="btn btn-outline-primary" for="pMonth">This month</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Podium -->
+    <div class="eco-card p-4 pb-0 mb-4">
+      <div class="podium" id="podium"><div class="skeleton w-100" style="height:220px"></div></div>
+    </div>
+
+    <!-- My position -->
+    <div class="alert bg-eco-mint border-0 d-none d-flex align-items-center gap-2" id="myPosition"></div>
+
+    <div class="eco-card overflow-hidden">
+      <div class="table-responsive">
+        <table class="table eco-table">
+          <thead><tr><th>Rank</th><th>Name</th><th>Level</th><th>Trips</th><th>Distance</th><th>CO₂ saved</th><th>Score</th></tr></thead>
+          <tbody id="boardBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/co2.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/leaderboard.js"></script>
+</body>
+</html>

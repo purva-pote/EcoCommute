@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoCommute · Make every green trip count</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="home">
+  <div id="navbar"></div>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-7 fade-in">
+            <span class="hero-badge"><i class="bi bi-globe-americas me-1"></i> SDG 11 &amp; SDG 13 aligned</span>
+            <h1 class="display-4 mb-3">Your commute has a carbon footprint.<br><span style="color:#bef264">Make it visible.</span></h1>
+            <p class="lead mb-4">Log your walks, rides, bus trips and carpools. EcoCommute instantly shows the CO₂ you saved compared to driving alone, rewards you with points, and ranks you against your peers.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="register.html" class="btn btn-light btn-lg text-success fw-semibold" id="heroCta">
+                <i class="bi bi-rocket-takeoff me-1"></i> Get started, it's free</a>
+              <a href="#calculator" class="btn btn-outline-light btn-lg"><i class="bi bi-calculator me-1"></i> Try the calculator</a>
+            </div>
+          </div>
+          <div class="col-lg-5 text-center d-none d-md-block">
+            <div class="hero-illustration">
+              <span class="float">🚲</span><span class="float delay">🌳</span><br>
+              <span class="float delay">🚌</span><span class="float">🚶</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMMUNITY COUNTER ============ -->
+    <section class="community-strip">
+      <div class="container">
+        <div class="eco-card p-4">
+          <div class="row text-center g-3">
+            <div class="col-6 col-md-3">
+              <div class="stat-icon icon-green mx-auto rounded-3 d-inline-flex p-2 fs-4"><i class="bi bi-cloud-check"></i></div>
+              <div class="fs-3 fw-bold mt-1" id="cCo2">–</div><div class="small text-muted">kg CO₂ saved by the community</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-icon icon-blue mx-auto rounded-3 d-inline-flex p-2 fs-4"><i class="bi bi-signpost-split"></i></div>
+              <div class="fs-3 fw-bold mt-1" id="cKm">–</div><div class="small text-muted">green kilometres travelled</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-icon icon-amber mx-auto rounded-3 d-inline-flex p-2 fs-4"><i class="bi bi-geo-alt"></i></div>
+              <div class="fs-3 fw-bold mt-1" id="cTrips">–</div><div class="small text-muted">trips logged</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-icon icon-teal mx-auto rounded-3 d-inline-flex p-2 fs-4"><i class="bi bi-tree"></i></div>
+              <div class="fs-3 fw-bold mt-1" id="cTrees">–</div><div class="small text-muted">trees' yearly absorption</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="py-5 mt-4">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">How it works</h2>
+          <p class="section-sub">One simple loop: log → calculate → compete</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="eco-card hover-lift p-4 h-100 text-center">
+              <div class="step-number"><i class="bi bi-pencil-square"></i></div>
+              <h5 class="fw-semibold">1. Log your trip</h5>
+              <p class="text-muted mb-0">Pick how you travelled (walk, cycle, public transport or carpool) and enter the distance. Takes 5 seconds.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="eco-card hover-lift p-4 h-100 text-center">
+              <div class="step-number"><i class="bi bi-cpu"></i></div>
+              <h5 class="fw-semibold">2. See your impact</h5>
+              <p class="text-muted mb-0">We compare it to driving alone (120 g CO₂/km) and instantly calculate the CO₂ you saved and points you earned.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="eco-card hover-lift p-4 h-100 text-center">
+              <div class="step-number"><i class="bi bi-trophy"></i></div>
+              <h5 class="fw-semibold">3. Track &amp; compete</h5>
+              <p class="text-muted mb-0">Watch your dashboard grow, keep your streak alive, level up from 🌱 Seedling to 🌲 Forest, and climb the leaderboard.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ QUICK CALCULATOR ============ -->
+    <section class="py-5" id="calculator">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2 class="section-title">How much CO₂ would you save?</h2>
+          <p class="section-sub">Try it now, no account needed</p>
+        </div>
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="eco-card p-4 h-100">
+              <label class="form-label fw-semibold">1. How do you travel?</label>
+              <div class="row g-2 mb-4" id="calcModes"></div>
+
+              <label class="form-label fw-semibold d-flex justify-content-between" for="calcDistance">
+                <span>2. Distance</span><span class="text-eco" id="calcDistanceLabel">5 km</span>
+              </label>
+              <input type="range" class="form-range" id="calcDistance" min="0.5" max="50" step="0.5" value="5">
+              <div class="d-flex justify-content-between small text-muted mb-3"><span>0.5 km</span><span>50 km</span></div>
+
+              <div id="calcPassengersWrap" class="d-none">
+                <label class="form-label fw-semibold" for="calcPassengers">3. People in the car</label>
+                <select id="calcPassengers" class="form-select w-auto">
+                  <option>2</option><option selected>3</option><option>4</option><option>5</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="preview-panel h-100">
+              <div class="muted small text-uppercase fw-semibold">You would save</div>
+              <div class="big-number my-1"><span id="calcCo2">0.60</span> <span class="fs-4">kg CO₂</span></div>
+              <div class="muted mb-3" id="calcSentence">compared to driving the same distance alone</div>
+              <div class="row g-2 mb-4">
+                <div class="col-6"><div class="pill"><div class="v" id="calcPoints">15</div><div class="small muted">points earned</div></div></div>
+                <div class="col-6"><div class="pill"><div class="v" id="calcTrees">0.03</div><div class="small muted">trees / year 🌳</div></div></div>
+              </div>
+              <div class="small fw-semibold mb-2">CO₂ emitted for this distance (grams)</div>
+              <div id="calcCompare"></div>
+              <a href="register.html" class="btn btn-light text-success fw-semibold w-100 mt-3">Start tracking my trips <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SDGs ============ -->
+    <section class="py-5">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2 class="section-title">Why it matters</h2>
+          <p class="section-sub">Small daily choices, multiplied by a whole campus, add up to real change</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="sdg-card sdg-11">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="sdg-num">11</div>
+                <h4 class="mb-0 fw-bold">Sustainable Cities &amp; Communities</h4>
+              </div>
+              <p class="mb-0">Fewer private cars means less traffic congestion, cleaner air and safer streets. EcoCommute encourages walking, cycling and shared transport in everyday life.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="sdg-card sdg-13">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="sdg-num">13</div>
+                <h4 class="mb-0 fw-bold">Climate Action</h4>
+              </div>
+              <p class="mb-0">Transport is one of the largest sources of urban emissions. By making each person's savings visible and rewarding, we turn climate action into a daily habit.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-card p-4 p-md-5 mt-5 text-center bg-eco-mint">
+          <h3 class="fw-bold text-success mb-2">Ready to make your commute count?</h3>
+          <p class="text-muted mb-4">Join your classmates and start saving CO₂ today.</p>
+          <a href="register.html" class="btn btn-primary btn-lg me-2">Create free account</a>
+          <a href="leaderboard.html" class="btn btn-outline-primary btn-lg">View leaderboard</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/co2.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/home.js"></script>
+</body>
+</html>

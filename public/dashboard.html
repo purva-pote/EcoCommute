@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · EcoCommute</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="dashboard">
+  <div id="navbar"></div>
+
+  <main class="container py-4">
+    <!-- Welcome banner with level progress -->
+    <div class="welcome-banner mb-4 fade-in">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-7">
+          <div class="opacity-75" id="greeting">Hello</div>
+          <h2 class="fw-bold mb-2" id="userName">…</h2>
+          <span class="level-badge" id="levelBadge">🌱 Seedling</span>
+          <span class="level-badge ms-1" id="weekBadge"><i class="bi bi-calendar-week"></i> – kg this week</span>
+        </div>
+        <div class="col-lg-5">
+          <div class="d-flex justify-content-between small mb-1">
+            <span id="levelFrom">Seedling</span><span id="levelTo">Sprout</span>
+          </div>
+          <div class="progress"><div class="progress-bar" id="levelBar" style="width:0%"></div></div>
+          <div class="small mt-2 opacity-75" id="levelHint">Loading…</div>
+          <a href="log-trip.html" class="btn btn-light text-success fw-semibold mt-3"><i class="bi bi-plus-lg me-1"></i>Log a trip</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-green"><i class="bi bi-cloud-check"></i></span>
+        <div class="stat-value" id="kCo2">–</div><div class="stat-label">kg CO₂ saved</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-blue"><i class="bi bi-signpost-split"></i></span>
+        <div class="stat-value" id="kKm">–</div><div class="stat-label">km travelled green</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-amber"><i class="bi bi-geo-alt"></i></span>
+        <div class="stat-value" id="kTrips">–</div><div class="stat-label">trips logged</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-purple"><i class="bi bi-star"></i></span>
+        <div class="stat-value" id="kPoints">–</div><div class="stat-label">points</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-red"><i class="bi bi-fire"></i></span>
+        <div class="stat-value" id="kStreak">–</div><div class="stat-label">day streak</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-teal"><i class="bi bi-trophy"></i></span>
+        <div class="stat-value" id="kRank">–</div><div class="stat-label" id="kRankLabel">leaderboard rank</div></div></div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+      <div class="col-lg-8">
+        <div class="eco-card p-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0">CO₂ saved: last 14 days</h5>
+            <span class="badge bg-eco-mint text-success">kg per day</span>
+          </div>
+          <div class="chart-box"><canvas id="dailyChart"></canvas></div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="eco-card p-4 h-100">
+          <h5 class="card-title mb-3">Trips by mode</h5>
+          <div class="chart-box sm"><canvas id="modeChart"></canvas></div>
+          <div id="modeEmpty" class="empty-state d-none"><div class="emoji">🚲</div>No trips yet</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Recent trips -->
+      <div class="col-lg-8">
+        <div class="eco-card h-100">
+          <div class="d-flex justify-content-between align-items-center p-4 pb-2">
+            <h5 class="card-title mb-0">Recent trips</h5>
+            <a href="history.html" class="small">View all <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="table-responsive">
+            <table class="table eco-table">
+              <thead><tr><th>Date</th><th>Mode</th><th>Distance</th><th>CO₂ saved</th><th>Points</th></tr></thead>
+              <tbody id="recentBody">
+                <tr><td colspan="5"><div class="skeleton" style="height:120px"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact + tip -->
+      <div class="col-lg-4 d-flex flex-column gap-4">
+        <div class="eco-card p-4">
+          <h5 class="card-title mb-3">Your impact equals…</h5>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="fs-1">🌳</div>
+            <div><div class="fs-4 fw-bold" id="eqTrees">–</div><div class="small text-muted">trees absorbing CO₂ for a year</div></div>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="fs-1">🚗</div>
+            <div><div class="fs-4 fw-bold" id="eqCarKm">–</div><div class="small text-muted">of solo car driving avoided</div></div>
+          </div>
+          <div class="d-flex align-items-center gap-3">
+            <div class="fs-1">⛽</div>
+            <div><div class="fs-4 fw-bold" id="eqFuel">–</div><div class="small text-muted">of petrol not burned (≈15 km/L)</div></div>
+          </div>
+        </div>
+        <div class="eco-card tip-card p-4">
+          <div class="fw-semibold mb-1"><i class="bi bi-lightbulb text-warning me-1"></i>Eco tip of the day</div>
+          <div class="text-muted" id="tip"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="js/co2.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+</body>
+</html>

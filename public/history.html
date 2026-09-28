@@ -9,6 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="history">
   <div id="navbar"></div>
@@ -16,6 +17,7 @@
   <main class="container pb-4">
     <div class="page-header d-flex flex-wrap justify-content-between align-items-end gap-3">
       <div>
+        <span class="kicker">Your logbook</span>
         <h1><i class="bi bi-clock-history me-2"></i>Trip history</h1>
         <p class="text-muted mb-0">Every green trip you've logged.</p>
       </div>
@@ -50,11 +52,19 @@
     </div>
 
     <!-- Summary chips -->
-    <div class="row g-3 mb-3" id="summary">
-      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Trips</div><div class="fs-4 fw-bold" id="sTrips">–</div></div></div>
-      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Distance</div><div class="fs-4 fw-bold" id="sKm">–</div></div></div>
-      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">CO₂ saved</div><div class="fs-4 fw-bold text-success" id="sCo2">–</div></div></div>
-      <div class="col-6 col-md-3"><div class="eco-card p-3"><div class="small text-muted">Points</div><div class="fs-4 fw-bold" id="sPts">–</div></div></div>
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-md-3"><div class="eco-card stat-card">
+        <span class="stat-icon icon-green"><i class="bi bi-signpost-split"></i></span>
+        <div class="stat-value" id="sTrips">–</div><div class="stat-label">trips logged</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card stat-card">
+        <span class="stat-icon icon-blue"><i class="bi bi-geo-alt"></i></span>
+        <div class="stat-value" id="sKm">–</div><div class="stat-label">km travelled green</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card stat-card">
+        <span class="stat-icon icon-teal"><i class="bi bi-cloud-check"></i></span>
+        <div class="stat-value" id="sCo2">–</div><div class="stat-label">kg CO₂ saved</div></div></div>
+      <div class="col-6 col-md-3"><div class="eco-card stat-card">
+        <span class="stat-icon icon-purple"><i class="bi bi-star-fill"></i></span>
+        <div class="stat-value" id="sPts">–</div><div class="stat-label">points earned</div></div></div>
     </div>
 
     <div class="eco-card overflow-hidden">
@@ -92,6 +102,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/history.js"></script>
 </body>

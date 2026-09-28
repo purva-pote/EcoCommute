@@ -55,8 +55,8 @@ function renderCharts(months) {
       labels,
       datasets: [
         { type: 'line', label: 'Trips', data: months.map(m => m.trips), yAxisID: 'y1',
-          borderColor: '#0ea5e9', backgroundColor: '#0ea5e9', tension: .35, pointRadius: 3 },
-        { label: 'CO₂ saved (kg)', data: months.map(m => m.co2_saved), backgroundColor: '#16a34a', borderRadius: 8, maxBarThickness: 36 }
+          borderColor: '#4FB3D9', backgroundColor: '#4FB3D9', tension: .35, pointRadius: 3 },
+        { label: 'CO₂ saved (kg)', data: months.map(m => m.co2_saved), backgroundColor: '#3E9B3E', borderRadius: 8, maxBarThickness: 36 }
       ]
     },
     options: {

@@ -9,12 +9,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="leaderboard">
   <div id="navbar"></div>
 
   <main class="container pb-4">
     <div class="page-header text-center">
+      <span class="kicker">Top of the forest</span>
       <h1><i class="bi bi-trophy me-2"></i>Leaderboard</h1>
       <p class="text-muted">Who's making the biggest difference? Every green trip moves you up.</p>
 
@@ -40,7 +42,7 @@
     </div>
 
     <!-- My position -->
-    <div class="alert bg-eco-mint border-0 d-none d-flex align-items-center gap-2" id="myPosition"></div>
+    <div class="alert pos-banner d-none d-flex align-items-center gap-2" id="myPosition"></div>
 
     <div class="eco-card overflow-hidden">
       <div class="table-responsive">
@@ -57,6 +59,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/leaderboard.js"></script>
 </body>

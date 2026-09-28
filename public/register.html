@@ -9,22 +9,32 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="register">
   <div id="navbar"></div>
 
   <main class="container auth-wrap py-5">
-    <div class="eco-card w-100 overflow-hidden fade-in">
+    <div class="auth-card card-soft fade-in w-100">
       <div class="row g-0">
-        <div class="col-lg-5 auth-side d-none d-lg-flex flex-column justify-content-center">
-          <div class="display-3 mb-3">🌱</div>
-          <h2 class="fw-bold">Start your green journey</h2>
-          <p class="opacity-75">Join EcoCommute and turn every walk, ride and bus trip into visible climate impact.</p>
-          <div class="mt-3 p-3 rounded-4" style="background:rgba(255,255,255,.12)">
-            <div class="small opacity-75">Did you know?</div>
-            <div>Cycling just 5 km a day instead of driving saves about <strong>150 kg of CO₂</strong> a year.</div>
+        <aside class="col-lg-5 auth-side d-none d-lg-flex flex-column justify-content-center">
+          <div class="auth-side__inner">
+            <div class="treeline auth-side__treeline" aria-hidden="true"></div>
+            <div class="auth-side__art" aria-hidden="true">
+              <svg class="tsvg" style="--p:#F28BA8"><use href="#ec-walker"/></svg>
+              <svg class="tsvg" style="--p:#4FB3D9"><use href="#ec-cyclist"/></svg>
+            </div>
+            <span class="sparkle auth-spark auth-spark--1" aria-hidden="true"></span>
+            <span class="leaf-acc auth-leaf" aria-hidden="true"></span>
+            <span class="kicker auth-side__kicker">SDG 11 &amp; SDG 13 aligned</span>
+            <h2>Start your green journey</h2>
+            <p>Join EcoCommute and turn every walk, ride and bus trip into visible climate impact.</p>
+            <div class="auth-fact">
+              <div class="small auth-fact__k">Did you know?</div>
+              <div>Cycling just 5 km a day instead of driving saves about <strong>150 kg of CO₂</strong> a year.</div>
+            </div>
           </div>
-        </div>
+        </aside>
         <div class="col-lg-7 auth-form">
           <h3 class="fw-bold mb-1">Create your account</h3>
           <p class="text-muted mb-4">Already have one? <a href="login.html">Log in</a></p>
@@ -77,6 +87,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/auth.js"></script>
 </body>

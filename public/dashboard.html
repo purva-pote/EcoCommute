@@ -9,6 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="dashboard">
   <div id="navbar"></div>
@@ -16,6 +17,9 @@
   <main class="container py-4">
     <!-- Welcome banner with level progress -->
     <div class="welcome-banner mb-4 fade-in">
+      <div class="welcome-banner__art" aria-hidden="true"><svg><use href="#ec-tree-cluster"/></svg></div>
+      <span class="sparkle wb-spark wb-spark--1" aria-hidden="true"></span>
+      <span class="sparkle wb-spark wb-spark--2" aria-hidden="true"></span>
       <div class="row align-items-center g-3">
         <div class="col-lg-7">
           <div class="opacity-75" id="greeting">Hello</div>
@@ -62,7 +66,7 @@
         <div class="eco-card p-4 h-100">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="card-title mb-0">CO₂ saved: last 14 days</h5>
-            <span class="badge bg-eco-mint text-success">kg per day</span>
+            <span class="pill-tag">kg per day</span>
           </div>
           <div class="chart-box"><canvas id="dailyChart"></canvas></div>
         </div>
@@ -99,16 +103,16 @@
       <div class="col-lg-4 d-flex flex-column gap-4">
         <div class="eco-card p-4">
           <h5 class="card-title mb-3">Your impact equals…</h5>
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="fs-1">🌳</div>
+          <div class="impact-row">
+            <span class="icon-badge icon-green"><svg class="tsvg" aria-hidden="true"><use href="#ec-tree-round"/></svg></span>
             <div><div class="fs-4 fw-bold" id="eqTrees">–</div><div class="small text-muted">trees absorbing CO₂ for a year</div></div>
           </div>
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="fs-1">🚗</div>
+          <div class="impact-row">
+            <span class="icon-badge icon-blue"><svg class="tsvg" aria-hidden="true"><use href="#ec-car-outline"/></svg></span>
             <div><div class="fs-4 fw-bold" id="eqCarKm">–</div><div class="small text-muted">of solo car driving avoided</div></div>
           </div>
-          <div class="d-flex align-items-center gap-3">
-            <div class="fs-1">⛽</div>
+          <div class="impact-row">
+            <span class="icon-badge icon-amber"><i class="bi bi-fuel-pump"></i></span>
             <div><div class="fs-4 fw-bold" id="eqFuel">–</div><div class="small text-muted">of petrol not burned (≈15 km/L)</div></div>
           </div>
         </div>
@@ -126,6 +130,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/dashboard.js"></script>
 </body>

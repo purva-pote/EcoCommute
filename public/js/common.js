@@ -9,6 +9,14 @@
 const MODES = EcoCalc.MODES;
 const currentPage = document.body.dataset.page;
 
+/* ---------- Illustration sprites + artwork backgrounds ---------- */
+try {
+  if (typeof injectSprites === 'function') injectSprites();
+  if (typeof TREELINE_URI === 'string') document.documentElement.style.setProperty('--treeline-bg', 'url("' + TREELINE_URI + '")');
+  if (typeof HERO_URI === 'string') document.documentElement.style.setProperty('--art-hero', 'url("' + HERO_URI + '")');
+  if (typeof EMPTY_URI === 'string') document.documentElement.style.setProperty('--art-empty', 'url("' + EMPTY_URI + '")');
+} catch (e) { /* illustrations.js is optional */ }
+
 /* ---------- Navbar ---------- */
 function renderNavbar() {
   const nav = document.getElementById('navbar');
@@ -46,12 +54,12 @@ function renderNavbar() {
        <a href="register.html" class="btn btn-primary">Sign up</a>`;
 
   nav.innerHTML = `
-    <nav class="navbar navbar-expand-lg eco-navbar sticky-top py-2">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="${user ? 'dashboard.html' : 'index.html'}">
-          <span class="brand-icon"><i class="bi bi-tree-fill"></i></span>EcoCommute
+    <nav class="navbar navbar-expand-lg ec-topbar sticky-top py-2">
+      <div class="container ec-topbar__inner">
+        <a class="navbar-brand ec-brand" href="${user ? 'dashboard.html' : 'index.html'}">
+          <span class="ec-brand-icon"><svg class="tsvg" aria-hidden="true"><use href="#ec-tree-round"/></svg></span>EcoCommute
         </a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
@@ -74,13 +82,14 @@ function renderFooter() {
   const f = document.getElementById('footer');
   if (!f) return;
   f.innerHTML = `
-    <footer class="eco-footer">
-      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-        <div><i class="bi bi-tree-fill text-success me-1"></i><strong class="text-white">EcoCommute</strong>
-          · Make every green trip count.</div>
-        <div>
-          <span class="sdg-tag" style="background:#f59e0b;color:#fff">SDG 11 · Sustainable Cities</span>
-          <span class="sdg-tag" style="background:#3f7e44;color:#fff">SDG 13 · Climate Action</span>
+    <footer class="ec-footer">
+      <div class="treeline" aria-hidden="true"></div>
+      <div class="ec-footer__body container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <div><span class="ec-footer-brand"><svg class="tsvg" aria-hidden="true"><use href="#ec-tree-round"/></svg></span>
+          <strong class="text-white">EcoCommute</strong> · Make every green trip count.</div>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="sdg-pill sdg-pill--lime">SDG 11 · Sustainable Cities</span>
+          <span class="sdg-pill sdg-pill--ghost">SDG 13 · Climate Action</span>
         </div>
         <div class="small">Made by Mehak &amp; Purva · ${new Date().getFullYear()}</div>
       </div>
@@ -103,16 +112,18 @@ function toast(message, type = 'success') {
   if (!box) {
     box = document.createElement('div');
     box.id = 'toastBox';
-    box.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+    box.className = 'toast-container ec-toastbox position-fixed top-0 start-50 translate-middle-x p-3';
     document.body.appendChild(box);
   }
   const icons = { success: 'bi-check-circle-fill text-success', danger: 'bi-exclamation-octagon-fill text-danger',
                   warning: 'bi-exclamation-triangle-fill text-warning', info: 'bi-info-circle-fill text-primary' };
   const el = document.createElement('div');
-  el.className = 'toast align-items-center bg-white';
-  el.innerHTML = `<div class="d-flex"><div class="toast-body d-flex align-items-center gap-2">
-      <i class="bi ${icons[type] || icons.info} fs-5"></i><span>${escapeHtml(message)}</span></div>
-      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
+  el.className = 'toast ec-toast align-items-center bg-white';
+  el.setAttribute('data-type', icons[type] ? type : 'info');
+  el.innerHTML = `<div class="d-flex align-items-center w-100">
+      <span class="ec-toast-ico"><i class="bi ${icons[type] || icons.info}"></i></span>
+      <div class="toast-body">${escapeHtml(message)}</div>
+      <button type="button" class="btn-close me-3 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
   box.appendChild(el);
   const t = new bootstrap.Toast(el, { delay: 3500 });
   t.show();

@@ -29,6 +29,7 @@ function updatePreview() {
   const km = Number(distanceInput.value) || 0;
   const passengers = Number(passengersInput.value) || 2;
   const m = MODES[mode];
+  distanceRange.style.setProperty('--fill', Math.min(100, ((km - 0.5) / 99.5) * 100) + '%');
 
   document.getElementById('passengersWrap').classList.toggle('d-none', mode !== 'carpool');
   document.getElementById('previewMode').textContent = `${m.emoji} ${m.label}`;
@@ -42,10 +43,10 @@ function updatePreview() {
   const max = r.carEmissionG || 1;
   document.getElementById('pCompare').innerHTML = `
     <div class="compare-row"><span class="lbl">🚗 Car</span>
-      <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f87171"></div></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%;background:#B8BEC6"></div></div>
       <span class="val">${fmtNum(r.carEmissionG)} g</span></div>
     <div class="compare-row"><span class="lbl">${m.emoji} You</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${(r.modeEmissionG / max) * 100}%;background:#bef264"></div></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(r.modeEmissionG / max) * 100}%;background:#A8D65C"></div></div>
       <span class="val">${fmtNum(r.modeEmissionG)} g</span></div>`;
 
   // Show the formula so the logic is transparent

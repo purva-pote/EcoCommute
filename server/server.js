@@ -1,4 +1,4 @@
-// EcoCommute – Express server entry point
+// EcoCommute - Express server entry point
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -17,6 +17,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/trips', require('./routes/trips'));
 app.use('/api', require('./routes/stats'));             // /stats/:id, /community, /calculate
 app.use('/api/leaderboard', require('./routes/leaderboard').router);
+app.use('/api/transit', require('./routes/transit'));
 
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.use('/api', (req, res) => res.status(404).json({ error: 'API route not found' }));

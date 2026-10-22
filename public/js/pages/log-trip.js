@@ -29,7 +29,6 @@ function updatePreview() {
   const km = Number(distanceInput.value) || 0;
   const passengers = Number(passengersInput.value) || 2;
   const m = MODES[mode];
-  distanceRange.style.setProperty('--fill', Math.min(100, ((km - 0.5) / 99.5) * 100) + '%');
 
   document.getElementById('passengersWrap').classList.toggle('d-none', mode !== 'carpool');
   document.getElementById('previewMode').textContent = `${m.emoji} ${m.label}`;
@@ -43,10 +42,10 @@ function updatePreview() {
   const max = r.carEmissionG || 1;
   document.getElementById('pCompare').innerHTML = `
     <div class="compare-row"><span class="lbl">🚗 Car</span>
-      <div class="bar-track"><div class="bar-fill" style="width:100%;background:#B8BEC6"></div></div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%;background:#f87171"></div></div>
       <span class="val">${fmtNum(r.carEmissionG)} g</span></div>
     <div class="compare-row"><span class="lbl">${m.emoji} You</span>
-      <div class="bar-track"><div class="bar-fill" style="width:${(r.modeEmissionG / max) * 100}%;background:#A8D65C"></div></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(r.modeEmissionG / max) * 100}%;background:#fde68a"></div></div>
       <span class="val">${fmtNum(r.modeEmissionG)} g</span></div>`;
 
   // Show the formula so the logic is transparent
@@ -130,7 +129,14 @@ form.addEventListener('submit', async (e) => {
 function showSuccess({ trip, totals, level }) {
   const m = MODES[trip.mode];
   document.getElementById('sEmoji').textContent = m.emoji;
+  const cheers = ['Nice one!', 'Look at you go!', 'The planet says thanks!', 'Another one for the streak!', 'Fresh air, well earned!'];
+  document.getElementById('sTitle').textContent = cheers[Math.floor(Math.random() * cheers.length)];
   document.getElementById('sText').textContent = `${m.label} · ${trip.distance} km on ${fmtDate(trip.date)}`;
+  // A small, relatable comparison so the number means something
+  const phoneCharges = Math.round(trip.co2_saved * 1000 / 8);   // ~8 g CO2 per smartphone charge
+  document.getElementById('sFun').textContent = phoneCharges > 0
+    ? `That's like the CO₂ from charging a phone ${phoneCharges} times 📱`
+    : 'Every little bit counts 🌱';
   document.getElementById('sCo2').textContent = fmtKg(trip.co2_saved);
   document.getElementById('sPoints').textContent = '+' + trip.points;
   document.getElementById('sTotals').innerHTML = `
@@ -142,5 +148,16 @@ function showSuccess({ trip, totals, level }) {
   successModal.show();
   confetti();
 }
+
+// Pre-fill from a link, e.g. "Log this trip" on the Transit page:
+// log-trip.html?mode=public&distance=8.4&note=Vidyavihar → Dadar
+const prefill = new URLSearchParams(location.search);
+if (MODES[prefill.get('mode')]) document.getElementById('mode-' + prefill.get('mode')).checked = true;
+if (Number(prefill.get('distance')) > 0) {
+  distanceInput.value = prefill.get('distance');
+  distanceRange.value = Math.min(Number(prefill.get('distance')), 50);
+  setActiveChip();
+}
+if (prefill.get('note')) document.getElementById('note').value = prefill.get('note').slice(0, 100);
 
 updatePreview();

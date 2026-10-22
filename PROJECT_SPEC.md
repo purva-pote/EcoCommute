@@ -1,4 +1,4 @@
-# 🚲 EcoCommute — Project Specification (Frontend + Backend)
+# 🚲 EcoCommute: Project Specification (Frontend + Backend)
 
 > **Team:** Mehak & Purva
 > **Type:** Full-stack mini project
@@ -28,9 +28,11 @@
 | Layer | Technology | Why |
 |---|---|---|
 | Markup | HTML5 | One `.html` file per page, easy to read |
-| Styling | CSS3 + **Bootstrap 5.3** (CDN) + Bootstrap Icons | Responsive grid, ready components, custom green theme on top |
+| Styling | CSS3 + **Bootstrap 5.3** (CDN) + Bootstrap Icons | Responsive grid, ready components, custom teal theme on top |
 | Logic (client) | **Vanilla JavaScript** (no React) | `fetch()` for API calls, DOM manipulation |
 | Charts | **Chart.js 4** (CDN) | Line, bar and doughnut charts |
+| Icons | **Bootstrap Icons** + **Phosphor Icons** (duotone), both MIT | Interface icons, plus softer "natural" icons for the impact card |
+| Font | **Calibri**, with **Carlito** (Google Fonts) as a matching fallback | Clean, familiar, readable |
 | Server | **Node.js + Express** | REST API and serves the frontend files |
 | Database | **SQLite** (Node's built-in `node:sqlite`) | Zero setup: a single file `data/ecocommute.db` |
 | Auth | **bcryptjs** (password hashing) + **JSON Web Tokens** | Simple, stateless email/password login |
@@ -57,7 +59,9 @@ Eco Commute/
 │       ├── auth.js          ← register / login / me
 │       ├── trips.js         ← create / list / delete trips
 │       ├── stats.js         ← personal + monthly stats, community totals
-│       └── leaderboard.js   ← ranked users
+│       ├── leaderboard.js   ← ranked users
+│       └── transit.js       ← train / metro / bus departures
+│   └── transit-data.js      ← lines, stops, distances, service frequencies
 └── public/                  ← FRONTEND (served by Express)
     ├── index.html           ← Landing page + quick calculator
     ├── login.html
@@ -67,6 +71,8 @@ Eco Commute/
     ├── history.html
     ├── stats.html           ← Monthly statistics
     ├── leaderboard.html
+    ├── transit.html         ← Local train, metro & bus schedules
+    ├── images/              ← hero / sign-up photo
     ├── css/style.css
     └── js/
         ├── co2.js           ← ⭐ shared calculation logic (used by BOTH browser & server)
@@ -128,13 +134,15 @@ Trees equivalent = CO₂ saved (kg) / 21        (1 tree absorbs ≈ 21 kg CO₂ 
 - Responsive layout: works on mobile, tablet and laptop (Bootstrap grid).
 - **Consistent navbar** injected by `common.js`:
   - Logged out: Home · Leaderboard · Login · Sign up
-  - Logged in: Dashboard · Log Trip · History · Monthly Stats · Leaderboard · user menu (Logout)
+  - Logged in: Dashboard · Log Trip · History · Stats · Transit · Leaderboard · user menu (Logout)
   - Active page highlighted.
 - **Auth guard:** protected pages redirect to `login.html` if no valid token.
 - **Toast notifications** for success and error messages (e.g. "Trip logged!", "Invalid password").
 - **Loading states:** spinners/skeletons while data loads.
 - **Empty states:** friendly message plus a button when there's no data yet ("No trips yet, log your first one!").
-- Green eco theme, Poppins font, rounded cards, subtle hover animations, animated counters.
+- Teal / aqua theme with a sunny yellow accent, Fredoka (headings) + Nunito (body) fonts, rounded cards, playful hover animations, animated counters.
+- Friendly, human copy: streak messages, random cheers after logging a trip, relatable comparisons (e.g. phone charges).
+- Real photo (cyclist beside a green tram line) on the home hero and sign-up page, with a dark teal fade so text never clashes with the image.
 - Footer with SDG 11 & SDG 13 tags.
 
 ### 5.2 `index.html`: Landing page (public)
@@ -170,8 +178,8 @@ Trees equivalent = CO₂ saved (kg) / 21        (1 tree absorbs ≈ 21 kg CO₂ 
 
 ### 5.5 `log-trip.html`: Trip logging (protected) ⭐ core feature
 - **Mode selector** as 4 large clickable cards with icons (Walk / Cycle / Public transport / Carpool).
-- **Distance** number input synced with a slider (0.1 – 100 km).
-- **Passengers** field that appears **only when Carpool is selected** (2 – 8).
+- **Distance** number input synced with a slider (0.1 - 100 km).
+- **Passengers** field that appears **only when Carpool is selected** (2 - 8).
 - **Date** picker (defaults to today; future dates not allowed).
 - Optional **note** (e.g. "Home → College").
 - **Quick-distance chips:** 2 km, 5 km, 10 km, 20 km.
@@ -192,7 +200,17 @@ Trees equivalent = CO₂ saved (kg) / 21        (1 tree absorbs ≈ 21 kg CO₂ 
 - **Month-wise table:** trips, distance, CO₂ saved, points, most-used mode.
 - Highlight cards: **Best month**, **This month vs last month (% change)**, **Average CO₂ per trip**.
 
-### 5.8 `leaderboard.html`: Leaderboard (public; highlights you if logged in)
+### 5.8 `transit.html`: Transit schedules (public)
+- Tabs for **Local Train**, **Metro** and **Bus**.
+- Pick a line, a "from" and "to" stop (with a swap button) and a departure time (defaults to now).
+- Shows the **next 8 departures** with departure and arrival times, journey time, and a live countdown ("in 4 min, hurry!") that refreshes every minute.
+- Trip summary: distance, number of stops, direction, and **CO₂ saved vs. driving + points** for that trip.
+- **Stops on your trip** shown as a coloured line diagram, with board / get-off markers.
+- First and last service of the day; a friendly message when services have ended for the night.
+- **"Log this trip"** opens the Log Trip page already filled in (public transport, distance, note).
+- Lines: Mumbai Central (Slow), Western (Slow), Metro Line 1, plus sample campus bus routes. Stations and distances follow the real lines; timings are generated from first/last services and rush-hour frequencies (clearly noted on the page).
+
+### 5.9 `leaderboard.html`: Leaderboard (public; highlights you if logged in)
 - Toggle **metric:** CO₂ saved ↔ Score.
 - Toggle **period:** All time ↔ This month.
 - **Podium** for the top 3 (🥇🥈🥉).
@@ -229,7 +247,7 @@ Trees equivalent = CO₂ saved (kg) / 21        (1 tree absorbs ≈ 21 kg CO₂ 
 | user_id | INTEGER FK → users.id | ON DELETE CASCADE |
 | mode | TEXT | CHECK in ('walk','cycle','public','carpool') |
 | distance | REAL | km |
-| passengers | INTEGER | 1, or 2–8 for carpool |
+| passengers | INTEGER | 1, or 2-8 for carpool |
 | date | TEXT | `YYYY-MM-DD` |
 | co2_saved | REAL | **kg**, calculated by the server |
 | points | INTEGER | calculated by the server |
@@ -253,6 +271,8 @@ Indexes: `trips(user_id)`, `trips(date)`.
 | GET | `/api/leaderboard?metric=co2\|score&period=all\|month` | ❌ | Ranked users |
 | GET | `/api/community` | ❌ | Platform-wide totals (landing page) |
 | GET | `/api/calculate?mode=&distance=&passengers=` | ❌ | Pure calculation (no DB) |
+| GET | `/api/transit` | ❌ | All transit lines and their stops |
+| GET | `/api/transit/departures?route=&from=&to=&time=HH:MM` | ❌ | Next departures, journey time, distance, CO₂ saved |
 
 **Example: `POST /api/trips`**
 ```json
@@ -272,10 +292,10 @@ Indexes: `trips(user_id)`, `trips(date)`.
 
 ### 6.5 Validation & error handling (server side, never trust the client)
 - `mode` must be one of the 4 allowed values.
-- `distance`: number, 0.1 – 100 km.
-- `passengers`: integer 2 – 8 (carpool only; forced to 1 for other modes).
+- `distance`: number, 0.1 - 100 km.
+- `passengers`: integer 2 - 8 (carpool only; forced to 1 for other modes).
 - `date`: valid `YYYY-MM-DD`, not in the future (defaults to today).
-- `email` format, `password` ≥ 6 characters, `name` 2–50 characters.
+- `email` format, `password` ≥ 6 characters, `name` 2-50 characters.
 - Status codes: `400` bad input · `401` not logged in · `403` not allowed · `404` not found · `409` email already exists · `500` server error.
 - All SQL uses **prepared statements** (protects against SQL injection).
 
@@ -330,3 +350,8 @@ Indexes: `trips(user_id)`, `trips(date)`.
 - 🗺️ Maps API for automatic distance calculation.
 - 🔔 Reminders / push notifications to log trips.
 - ☁️ Deploy: Netlify/Vercel (frontend) + Render/Railway (backend) + PostgreSQL (Supabase).
+
+---
+
+## 12. Credits
+Full list of third-party libraries, fonts, icons and their licences: see the **Credits & Third-Party Resources** section in `README.md`.

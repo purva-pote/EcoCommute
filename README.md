@@ -42,6 +42,23 @@ To wipe everything and recreate the demo data: `npm run seed`
 5. **Dashboard** again: numbers and charts updated.
 6. **Leaderboard** → *This month*: the demo user moves up a place.
 7. **Monthly Stats:** month-by-month impact.
+8. **Transit:** pick Vidyavihar → Dadar, show the live departures, then click **Log this trip**.
+
+## 📚 Credits & Third-Party Resources
+
+| Resource | Used for | Licence | Link |
+|---|---|---|---|
+| Bootstrap 5.3.3 | Layout, grid, buttons, forms, modals | MIT | https://getbootstrap.com |
+| Bootstrap Icons 1.11.3 | Navbar, cards, buttons and mode icons | MIT | https://icons.getbootstrap.com |
+| Phosphor Icons 2.1.2 (duotone) | "Your impact equals" icons on the dashboard (tree, car, fuel pump) | MIT | https://phosphoricons.com |
+| Chart.js 4.4.4 | Dashboard and monthly statistics charts | MIT | https://www.chartjs.org |
+| Calibri | Main font (built into Windows / Microsoft Office) | Microsoft system font | https://learn.microsoft.com/typography/font-list/calibri |
+| Carlito (Google Fonts) | Fallback font with the same shapes and widths as Calibri, for Mac / Linux / phones | SIL Open Font License | https://fonts.google.com/specimen/Carlito |
+| Express, bcryptjs, jsonwebtoken, cors | Backend server, password hashing, login tokens | MIT | https://www.npmjs.com |
+| Node.js built-in SQLite (`node:sqlite`) | Database | MIT (Node.js) | https://nodejs.org/api/sqlite.html |
+| Photos (tram, park with bikes, sunset cyclist) | Home, sign-up, login and dashboard backgrounds | Add the source and licence of each photo here | |
+
+All libraries are loaded from the jsDelivr CDN or installed with npm; no icons or images were drawn by us.
 
 ## 📁 Structure
 ```

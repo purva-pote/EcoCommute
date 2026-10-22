@@ -25,7 +25,7 @@ function validateTrip(body) {
   if (mode === 'carpool') {
     passengers = Number(body.passengers);
     if (!Number.isInteger(passengers) || passengers < minPassengers || passengers > maxPassengers) {
-      throw new HttpError(400, `Carpool must have ${minPassengers}–${maxPassengers} people.`);
+      throw new HttpError(400, `Carpool must have ${minPassengers}-${maxPassengers} people.`);
     }
   }
 

@@ -7,36 +7,26 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="login">
   <div id="navbar"></div>
 
   <main class="container auth-wrap py-5">
-    <div class="auth-card card-soft fade-in w-100">
+    <div class="eco-card w-100 overflow-hidden fade-in">
       <div class="row g-0">
-        <aside class="col-lg-5 auth-side d-none d-lg-flex flex-column justify-content-center">
-          <div class="auth-side__inner">
-            <div class="treeline auth-side__treeline" aria-hidden="true"></div>
-            <div class="auth-side__art" aria-hidden="true">
-              <svg class="tsvg" style="--p:#4FB3D9"><use href="#ec-walker"/></svg>
-              <svg class="tsvg" style="--p:#F28BA8"><use href="#ec-cyclist"/></svg>
-            </div>
-            <span class="sparkle auth-spark auth-spark--1" aria-hidden="true"></span>
-            <span class="leaf-acc auth-leaf" aria-hidden="true"></span>
-            <span class="kicker auth-side__kicker">Welcome back</span>
-            <h2>Every trip adds up.</h2>
-            <p>Log in to see how much CO₂ you've saved so far.</p>
-            <ul class="list-unstyled auth-check">
-              <li><i class="bi bi-check-lg"></i>Track CO₂ saved on every trip</li>
-              <li><i class="bi bi-check-lg"></i>Earn points &amp; level up</li>
-              <li><i class="bi bi-check-lg"></i>Compete on the leaderboard</li>
-            </ul>
-          </div>
-        </aside>
+        <div class="col-lg-5 auth-side photo photo-login d-none d-lg-flex flex-column">
+          <h2 class="fw-bold">Welcome back! 👋</h2>
+          <p>Missed you. Let's see how much CO₂ you've kept out of the air so far.</p>
+          <ul class="list-unstyled mt-2 mb-0">
+            <li class="mb-2"><i class="bi bi-check2-circle me-2"></i>Track CO₂ saved on every trip</li>
+            <li class="mb-2"><i class="bi bi-check2-circle me-2"></i>Earn points &amp; level up</li>
+            <li><i class="bi bi-check2-circle me-2"></i>Compete on the leaderboard</li>
+          </ul>
+        </div>
         <div class="col-lg-7 auth-form">
+          <div class="auth-photo-mobile photo-login d-lg-none">Good to see you again 🌅</div>
           <h3 class="fw-bold mb-1">Log in</h3>
           <p class="text-muted mb-4">New here? <a href="register.html">Create an account</a></p>
 
@@ -78,7 +68,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/auth.js"></script>
 </body>

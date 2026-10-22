@@ -1,6 +1,6 @@
 // Leaderboard: podium + ranked table, switch metric (CO2/score) and period (all/month)
 
-const podiumColors = ['#F5A623', '#9AA0A8', '#C8854F'];
+const podiumColors = ['#eab308', '#94a3b8', '#f97316'];
 
 function selected(name) {
   return document.querySelector(`input[name=${name}]:checked`).value;

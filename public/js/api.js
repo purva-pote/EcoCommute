@@ -1,5 +1,5 @@
 /*
- * EcoCommute – API helper
+ * EcoCommute - API helper
  * Wraps fetch() so every page can call the backend with one line:
  *     const data = await api('/api/trips', { method: 'POST', body: {...} });
  */

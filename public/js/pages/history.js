@@ -67,7 +67,7 @@ function renderTable() {
       <td class="text-nowrap">${fmtDate(t.date)}</td>
       <td>${modeBadge(t.mode)}</td>
       <td>${fmtKm(t.distance)}</td>
-      <td>${t.mode === 'carpool' ? t.passengers : '–'}</td>
+      <td>${t.mode === 'carpool' ? t.passengers : '-'}</td>
       <td class="text-success fw-semibold">${fmtKg(t.co2_saved)}</td>
       <td><span class="badge text-bg-light">+${t.points}</span></td>
       <td class="text-muted small">${escapeHtml(t.note || '')}</td>
@@ -77,7 +77,7 @@ function renderTable() {
     </tr>`).join('');
 
   pager.innerHTML = `
-    <span>Showing ${(page - 1) * PAGE_SIZE + 1}–${Math.min(page * PAGE_SIZE, filtered.length)} of ${filtered.length}</span>
+    <span>Showing ${(page - 1) * PAGE_SIZE + 1}-${Math.min(page * PAGE_SIZE, filtered.length)} of ${filtered.length}</span>
     <div class="btn-group">
       <button class="btn btn-sm btn-outline-secondary" data-page="${page - 1}" ${page === 1 ? 'disabled' : ''}><i class="bi bi-chevron-left"></i></button>
       <button class="btn btn-sm btn-outline-secondary" disabled>${page} / ${pages}</button>

@@ -1,5 +1,5 @@
 /*
- * EcoCommute – CO2 & points calculation (single source of truth)
+ * EcoCommute - CO2 & points calculation (single source of truth)
  * ---------------------------------------------------------------
  * This file is used in TWO places:
  *   1. In the browser (live preview on the calculator / log-trip page)
@@ -21,7 +21,7 @@
   const KG_CO2_PER_TREE_YEAR = 21;
 
   const MODES = {
-    walk:    { label: 'Walking',          icon: 'bi-person-walking', emoji: '🚶', color: '#22c55e', basePoints: 10 },
+    walk:    { label: 'Walking',          icon: 'bi-person-walking', emoji: '🚶', color: '#10b981', basePoints: 10 },
     cycle:   { label: 'Cycling',          icon: 'bi-bicycle',        emoji: '🚲', color: '#0ea5e9', basePoints: 10 },
     public:  { label: 'Public Transport', icon: 'bi-bus-front',      emoji: '🚌', color: '#f59e0b', basePoints: 5  },
     carpool: { label: 'Carpool',          icon: 'bi-car-front',      emoji: '🚙', color: '#a855f7', basePoints: 3  }

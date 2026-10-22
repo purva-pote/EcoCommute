@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
   const email = String(req.body.email || '').trim().toLowerCase();
   const password = String(req.body.password || '');
 
-  if (name.length < 2 || name.length > 50) throw new HttpError(400, 'Name must be 2–50 characters.');
+  if (name.length < 2 || name.length > 50) throw new HttpError(400, 'Name must be 2-50 characters.');
   if (!EMAIL_RE.test(email)) throw new HttpError(400, 'Please enter a valid email address.');
   if (password.length < 6) throw new HttpError(400, 'Password must be at least 6 characters.');
 

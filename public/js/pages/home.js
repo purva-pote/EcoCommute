@@ -16,7 +16,7 @@ api('/api/community')
     animateCounter(document.getElementById('cTrees'), c.trees, 1);
   })
   .catch(() => {
-    ['cCo2', 'cKm', 'cTrips', 'cTrees'].forEach(id => document.getElementById(id).textContent = '–');
+    ['cCo2', 'cKm', 'cTrips', 'cTrees'].forEach(id => document.getElementById(id).textContent = '-');
   });
 
 /* ---------- Quick calculator ---------- */
@@ -37,7 +37,6 @@ function updateCalculator() {
   const passengers = Number(passengersInput.value);
   document.getElementById('calcPassengersWrap').classList.toggle('d-none', mode !== 'carpool');
   document.getElementById('calcDistanceLabel').textContent = km + ' km';
-  distanceInput.style.setProperty('--fill', Math.min(100, ((km - 0.5) / 49.5) * 100) + '%');
 
   const r = EcoCalc.calculateTrip(mode, km, passengers);
   document.getElementById('calcCo2').textContent = r.co2SavedKg.toFixed(2);
@@ -48,10 +47,10 @@ function updateCalculator() {
 
   // Comparison bars: grams emitted by each option for this distance
   const rows = [
-    { label: '🚗 Car alone', g: EcoCalc.CAR_BASELINE_G_PER_KM * km, color: '#B8BEC6' },
-    { label: '🚌 Bus/Metro', g: EcoCalc.emissionPerKm('public') * km, color: '#2A7A2F' },
-    { label: '🚙 Carpool', g: EcoCalc.emissionPerKm('carpool', mode === 'carpool' ? passengers : 3) * km, color: '#3E9B3E' },
-    { label: '🚲 Cycle/Walk', g: 0, color: '#A8D65C' }
+    { label: '🚗 Car alone', g: EcoCalc.CAR_BASELINE_G_PER_KM * km, color: '#ef4444' },
+    { label: '🚙 Carpool', g: EcoCalc.emissionPerKm('carpool', mode === 'carpool' ? passengers : 3) * km, color: '#a855f7' },
+    { label: '🚌 Bus/Metro', g: EcoCalc.emissionPerKm('public') * km, color: '#f59e0b' },
+    { label: '🚲 Cycle/Walk', g: 0, color: '#14b8a6' }
   ];
   const max = rows[0].g || 1;
   document.getElementById('calcCompare').innerHTML = rows.map(r => `

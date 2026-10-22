@@ -19,10 +19,10 @@ function renderHighlights({ year, months }) {
   const yearCo2 = months.reduce((s, m) => s + m.co2_saved, 0);
   const yearTrips = months.reduce((s, m) => s + m.trips, 0);
   document.getElementById('hYearCo2').textContent = fmtKg(yearCo2);
-  document.getElementById('hAvg').textContent = yearTrips ? fmtKg(yearCo2 / yearTrips) : '–';
+  document.getElementById('hAvg').textContent = yearTrips ? fmtKg(yearCo2 / yearTrips) : '-';
 
   const best = months.reduce((a, b) => (b.co2_saved > a.co2_saved ? b : a), months[0]);
-  document.getElementById('hBest').textContent = best.co2_saved ? monthName(best.month, 'long') : '–';
+  document.getElementById('hBest').textContent = best.co2_saved ? monthName(best.month, 'long') : '-';
   document.getElementById('hBestLabel').textContent = best.co2_saved ? `best month · ${fmtKg(best.co2_saved)}` : 'best month';
 
   // This month vs last month (only meaningful for the current year)
@@ -40,7 +40,7 @@ function renderHighlights({ year, months }) {
       return;
     }
   }
-  change.textContent = '–';
+  change.textContent = '-';
   document.getElementById('hChangeLabel').textContent = 'this month vs last month';
 }
 
@@ -55,8 +55,8 @@ function renderCharts(months) {
       labels,
       datasets: [
         { type: 'line', label: 'Trips', data: months.map(m => m.trips), yAxisID: 'y1',
-          borderColor: '#4FB3D9', backgroundColor: '#4FB3D9', tension: .35, pointRadius: 3 },
-        { label: 'CO₂ saved (kg)', data: months.map(m => m.co2_saved), backgroundColor: '#3E9B3E', borderRadius: 8, maxBarThickness: 36 }
+          borderColor: '#0ea5e9', backgroundColor: '#0ea5e9', tension: .35, pointRadius: 3 },
+        { label: 'CO₂ saved (kg)', data: months.map(m => m.co2_saved), backgroundColor: '#0d9488', borderRadius: 8, maxBarThickness: 36 }
       ]
     },
     options: {
@@ -101,7 +101,7 @@ function renderTable(months) {
       <td>${fmtKm(m.distance)}</td>
       <td class="text-success fw-semibold">${fmtKg(m.co2_saved)}</td>
       <td>${fmtNum(m.points)}</td>
-      <td>${m.topMode ? modeBadge(m.topMode) : '–'}</td>
+      <td>${m.topMode ? modeBadge(m.topMode) : '-'}</td>
     </tr>`).join('');
   const sum = (k) => active.reduce((s, m) => s + m[k], 0);
   foot.innerHTML = `<tr><td>Total</td><td>${sum('trips')}</td><td>${fmtKm(sum('distance'))}</td>

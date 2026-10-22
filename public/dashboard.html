@@ -7,9 +7,10 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Phosphor Icons (duotone), MIT licence: https://phosphoricons.com -->
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/theme.css" rel="stylesheet">
 </head>
 <body data-page="dashboard">
   <div id="navbar"></div>
@@ -17,24 +18,26 @@
   <main class="container py-4">
     <!-- Welcome banner with level progress -->
     <div class="welcome-banner mb-4 fade-in">
-      <div class="welcome-banner__art" aria-hidden="true"><svg><use href="#ec-tree-cluster"/></svg></div>
-      <span class="sparkle wb-spark wb-spark--1" aria-hidden="true"></span>
-      <span class="sparkle wb-spark wb-spark--2" aria-hidden="true"></span>
-      <div class="row align-items-center g-3">
-        <div class="col-lg-7">
+      <div class="row g-0 h-100">
+        <!-- Left: greeting + level progress on teal -->
+        <div class="col-lg-7 banner-text">
           <div class="opacity-75" id="greeting">Hello</div>
           <h2 class="fw-bold mb-2" id="userName">…</h2>
           <span class="level-badge" id="levelBadge">🌱 Seedling</span>
-          <span class="level-badge ms-1" id="weekBadge"><i class="bi bi-calendar-week"></i> – kg this week</span>
-        </div>
-        <div class="col-lg-5">
-          <div class="d-flex justify-content-between small mb-1">
+          <span class="level-badge ms-1" id="weekBadge"><i class="bi bi-calendar-week"></i> - kg this week</span>
+          <div class="banner-note mt-2" id="bannerNote"></div>
+
+          <div class="d-flex justify-content-between small mt-3 mb-1">
             <span id="levelFrom">Seedling</span><span id="levelTo">Sprout</span>
           </div>
           <div class="progress"><div class="progress-bar" id="levelBar" style="width:0%"></div></div>
-          <div class="small mt-2 opacity-75" id="levelHint">Loading…</div>
-          <a href="log-trip.html" class="btn btn-light text-success fw-semibold mt-3"><i class="bi bi-plus-lg me-1"></i>Log a trip</a>
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-2">
+            <div class="small opacity-75" id="levelHint">Loading…</div>
+            <a href="log-trip.html" class="btn btn-light btn-sm text-success fw-bold px-3"><i class="bi bi-plus-lg me-1"></i>Log a trip</a>
+          </div>
         </div>
+        <!-- Right: the photo, shown with as little cropping as possible -->
+        <div class="col-lg-5 banner-photo" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -42,22 +45,22 @@
     <div class="row g-3 mb-4">
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-green"><i class="bi bi-cloud-check"></i></span>
-        <div class="stat-value" id="kCo2">–</div><div class="stat-label">kg CO₂ saved</div></div></div>
+        <div class="stat-value" id="kCo2">-</div><div class="stat-label">kg CO₂ saved</div></div></div>
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-blue"><i class="bi bi-signpost-split"></i></span>
-        <div class="stat-value" id="kKm">–</div><div class="stat-label">km travelled green</div></div></div>
+        <div class="stat-value" id="kKm">-</div><div class="stat-label">km travelled green</div></div></div>
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-amber"><i class="bi bi-geo-alt"></i></span>
-        <div class="stat-value" id="kTrips">–</div><div class="stat-label">trips logged</div></div></div>
+        <div class="stat-value" id="kTrips">-</div><div class="stat-label">trips logged</div></div></div>
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-purple"><i class="bi bi-star"></i></span>
-        <div class="stat-value" id="kPoints">–</div><div class="stat-label">points</div></div></div>
+        <div class="stat-value" id="kPoints">-</div><div class="stat-label">points</div></div></div>
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-red"><i class="bi bi-fire"></i></span>
-        <div class="stat-value" id="kStreak">–</div><div class="stat-label">day streak</div></div></div>
+        <div class="stat-value" id="kStreak">-</div><div class="stat-label">day streak</div></div></div>
       <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
         <span class="stat-icon icon-teal"><i class="bi bi-trophy"></i></span>
-        <div class="stat-value" id="kRank">–</div><div class="stat-label" id="kRankLabel">leaderboard rank</div></div></div>
+        <div class="stat-value" id="kRank">-</div><div class="stat-label" id="kRankLabel">leaderboard rank</div></div></div>
     </div>
 
     <!-- Charts -->
@@ -66,7 +69,7 @@
         <div class="eco-card p-4 h-100">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="card-title mb-0">CO₂ saved: last 14 days</h5>
-            <span class="pill-tag">kg per day</span>
+            <span class="badge bg-eco-mint text-success">kg per day</span>
           </div>
           <div class="chart-box"><canvas id="dailyChart"></canvas></div>
         </div>
@@ -103,17 +106,17 @@
       <div class="col-lg-4 d-flex flex-column gap-4">
         <div class="eco-card p-4">
           <h5 class="card-title mb-3">Your impact equals…</h5>
-          <div class="impact-row">
-            <span class="icon-badge icon-green"><svg class="tsvg" aria-hidden="true"><use href="#ec-tree-round"/></svg></span>
-            <div><div class="fs-4 fw-bold" id="eqTrees">–</div><div class="small text-muted">trees absorbing CO₂ for a year</div></div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <span class="impact-icon icon-green"><i class="ph-duotone ph-tree"></i></span>
+            <div><div class="fs-4 fw-bold" id="eqTrees">-</div><div class="small text-muted">trees absorbing CO₂ for a year</div></div>
           </div>
-          <div class="impact-row">
-            <span class="icon-badge icon-blue"><svg class="tsvg" aria-hidden="true"><use href="#ec-car-outline"/></svg></span>
-            <div><div class="fs-4 fw-bold" id="eqCarKm">–</div><div class="small text-muted">of solo car driving avoided</div></div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <span class="impact-icon icon-blue"><i class="ph-duotone ph-car-profile"></i></span>
+            <div><div class="fs-4 fw-bold" id="eqCarKm">-</div><div class="small text-muted">of solo car driving avoided</div></div>
           </div>
-          <div class="impact-row">
-            <span class="icon-badge icon-amber"><i class="bi bi-fuel-pump"></i></span>
-            <div><div class="fs-4 fw-bold" id="eqFuel">–</div><div class="small text-muted">of petrol not burned (≈15 km/L)</div></div>
+          <div class="d-flex align-items-center gap-3">
+            <span class="impact-icon icon-amber"><i class="ph-duotone ph-gas-pump"></i></span>
+            <div><div class="fs-4 fw-bold" id="eqFuel">-</div><div class="small text-muted">of petrol not burned (≈15 km/L)</div></div>
           </div>
         </div>
         <div class="eco-card tip-card p-4">
@@ -130,7 +133,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="js/co2.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/illustrations.js"></script>
   <script src="js/common.js"></script>
   <script src="js/pages/dashboard.js"></script>
 </body>

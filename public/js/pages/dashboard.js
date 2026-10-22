@@ -25,14 +25,24 @@ function renderKpis(s) {
   animateCounter(document.getElementById('kTrips'), t.trips, 0);
   animateCounter(document.getElementById('kPoints'), t.points, 0);
   animateCounter(document.getElementById('kStreak'), s.streak, 0);
-  document.getElementById('kRank').textContent = s.rank ? '#' + s.rank : '–';
+  document.getElementById('kRank').textContent = s.rank ? '#' + s.rank : '-';
   document.getElementById('kRankLabel').textContent = `rank of ${s.totalUsers} users`;
   document.getElementById('weekBadge').innerHTML = `<i class="bi bi-calendar-week"></i> ${fmtKg(t.week_co2)} this week`;
+  document.getElementById('bannerNote').textContent = streakMessage(s.streak, t.trips);
 
   // Equivalents: car km avoided = distance travelled green; petrol ≈ 15 km per litre
   document.getElementById('eqTrees').textContent = fmtNum(t.trees, 2);
   document.getElementById('eqCarKm').textContent = fmtKm(t.distance);
   document.getElementById('eqFuel').textContent = fmtNum(t.distance / 15, 1) + ' L';
+}
+
+/** A short, personal note based on how the user is doing */
+function streakMessage(streak, trips) {
+  if (!trips) return "Let's log your very first green trip today. 🌱";
+  if (streak === 0) return 'Your streak is resting. One trip today brings it back to life!';
+  if (streak === 1) return 'Day 1 of a new streak. Tomorrow makes it a habit!';
+  if (streak < 5) return `${streak} days in a row. You're on a roll! 🔥`;
+  return `${streak} days straight! Honestly, that's impressive. 🔥`;
 }
 
 function renderLevel(level) {
@@ -53,7 +63,7 @@ function renderDailyChart(daily) {
       datasets: [{
         label: 'CO₂ saved (kg)',
         data: daily.map(d => d.co2_saved),
-        backgroundColor: daily.map((d, i) => i === daily.length - 1 ? '#84cc16' : '#16a34a'),
+        backgroundColor: daily.map((d, i) => i === daily.length - 1 ? '#fbbf24' : '#0d9488'),
         borderRadius: 8,
         maxBarThickness: 34
       }]

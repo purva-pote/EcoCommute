@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node --no-warnings server/server.js",
-    "seed": "node --no-warnings server/seed.js --reset"
+    "seed": "node --no-warnings server/seed.js --reset",
+    "seed:admin": "node --no-warnings server/seed-admin-demo.js"
   },
   "engines": { "node": ">=22.5" },
   "dependencies": {

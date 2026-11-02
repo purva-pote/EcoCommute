@@ -8,7 +8,7 @@ const { HttpError } = require('../utils');
 const router = express.Router();
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const publicUser = (u) => ({ id: u.id, name: u.name, email: u.email, created_at: u.created_at });
+const publicUser = (u) => ({ id: u.id, name: u.name, email: u.email, role: u.role, created_at: u.created_at });
 
 router.post('/register', (req, res) => {
   const name = String(req.body.name || '').trim();

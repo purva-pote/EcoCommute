@@ -25,7 +25,8 @@ function renderNavbar() {
       link('history.html', 'history', 'bi-clock-history', 'History') +
       link('stats.html', 'stats', 'bi-bar-chart-line', 'Stats') +
       link('transit.html', 'transit', 'bi-train-front', 'Transit') +
-      link('leaderboard.html', 'leaderboard', 'bi-trophy', 'Leaderboard')
+      link('leaderboard.html', 'leaderboard', 'bi-trophy', 'Leaderboard') +
+      (user.role === 'admin' ? link('admin.html', 'admin', 'bi-shield-lock', 'Admin') : '')
     : link('index.html', 'home', 'bi-house', 'Home') +
       link('index.html#calculator', 'calc', 'bi-calculator', 'Calculator') +
       link('transit.html', 'transit', 'bi-train-front', 'Transit') +

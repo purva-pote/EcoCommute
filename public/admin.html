@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin overview · EcoCommute</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+</head>
+<body data-page="admin">
+  <div id="adminNav"></div>
+
+  <main class="container pb-4">
+    <div class="page-header">
+      <h1><i class="bi bi-speedometer2 me-2"></i>Overview</h1>
+      <p class="text-muted mb-0">Platform-wide EcoCommute activity.</p>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-blue"><i class="bi bi-people"></i></span>
+        <div class="stat-value" id="kUsers">-</div><div class="stat-label">total users</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-amber"><i class="bi bi-geo-alt"></i></span>
+        <div class="stat-value" id="kTrips">-</div><div class="stat-label">trips logged</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-green"><i class="bi bi-cloud-check"></i></span>
+        <div class="stat-value" id="kCo2">-</div><div class="stat-label">kg CO₂ saved</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-purple"><i class="bi bi-star"></i></span>
+        <div class="stat-value" id="kPoints">-</div><div class="stat-label">points earned</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-teal"><i class="bi bi-calendar-week"></i></span>
+        <div class="stat-value" id="kWeek">-</div><div class="stat-label">trips, last 7 days</div></div></div>
+      <div class="col-6 col-md-4 col-xl-2"><div class="eco-card stat-card hover-lift">
+        <span class="stat-icon icon-red"><i class="bi bi-person-plus"></i></span>
+        <div class="stat-value" id="kNew">-</div><div class="stat-label">new users, 30 days</div></div></div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+      <div class="col-lg-8">
+        <div class="eco-card p-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0">Activity</h5>
+            <select class="form-select form-select-sm w-auto" id="rangeSelect" aria-label="Time range">
+              <option value="30">Last 30 days</option>
+              <option value="90">Last 90 days</option>
+              <option value="180" selected>Last 6 months</option>
+              <option value="365">Last 12 months</option>
+            </select>
+          </div>
+          <div class="chart-box"><canvas id="timeChart"></canvas></div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="eco-card p-4 h-100">
+          <h5 class="card-title mb-3">Trips by mode</h5>
+          <div class="chart-box"><canvas id="modeChart"></canvas></div>
+          <div class="empty-state d-none" id="modeEmpty"><div class="emoji">🚲</div><p class="mb-0">No trips logged yet.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-card p-4">
+      <h5 class="card-title mb-3">CO₂ saved by mode (kg)</h5>
+      <div class="chart-box wide"><canvas id="co2ModeChart"></canvas></div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="js/co2.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/pages/admin-overview.js"></script>
+</body>
+</html>

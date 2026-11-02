@@ -1,0 +1,92 @@
+/* Admin-only additions, built on the existing EcoCommute tokens and Bootstrap classes */
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .2rem .7rem;
+  border-radius: 50px;
+  background: var(--eco-mint);
+  color: var(--eco-teal-dark);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.admin-navbar .navbar-brand {
+  margin-right: .6rem;
+}
+
+.admin-navbar .nav-link {
+  white-space: nowrap;
+}
+
+.admin-navbar .admin-actions {
+  gap: .5rem;
+}
+
+.admin-login-hint {
+  color: var(--eco-muted);
+  font-size: .9rem;
+}
+
+@media (max-width: 575.98px) {
+  .admin-navbar .navbar-brand {
+    font-size: 1.1rem;
+  }
+  .admin-navbar .admin-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Tables, pager, role badges ---------- */
+.admin-pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+  color: var(--eco-muted);
+  font-size: .9rem;
+}
+
+.admin-pager:empty {
+  display: none;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: .15rem .65rem;
+  border-radius: 50px;
+  font-size: .75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.role-badge.admin {
+  background: var(--eco-mint);
+  color: var(--eco-teal-dark);
+}
+
+.role-badge.user {
+  background: #f1f5f9;
+  color: var(--eco-muted);
+}
+
+.admin-note {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-actions-cell {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.chart-box.wide {
+  height: 260px;
+}

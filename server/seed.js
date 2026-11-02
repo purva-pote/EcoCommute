@@ -8,6 +8,9 @@ const { toDateStr, addDays } = require('./utils');
 // Demo login used on the login page's "Use demo account" button
 const DEMO = { name: 'Demo User', email: 'demo@ecocommute.test', password: 'demo1234' };
 
+// Admin login used on the admin sign-in page
+const ADMIN = { name: 'EcoCommute Admin', email: 'admin@ecocommute.test', password: 'admin1234' };
+
 // Each person has a commuting "habit": how often they log trips and which modes they prefer
 const PEOPLE = [
   { name: 'Aarav Sharma',  activity: 0.80, modes: { cycle: 5, walk: 2, public: 2 },            km: [3, 12] },
@@ -74,19 +77,31 @@ function seed() {
   }
 }
 
+// The admin is added on every start, so existing databases get one without a reseed
+function ensureAdmin() {
+  const exists = db.prepare('SELECT id FROM users WHERE email = ?').get(ADMIN.email);
+  if (exists) return;
+  const hash = bcrypt.hashSync(ADMIN.password, 10);
+  db.prepare('INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)')
+    .run(ADMIN.name, ADMIN.email, hash, 'admin');
+  console.log('  ✔ Admin account created (admin@ecocommute.test)');
+}
+
 function seedIfEmpty() {
   const { n } = db.prepare('SELECT COUNT(*) AS n FROM users').get();
   if (n === 0) {
     seed();
     console.log('  ✔ Demo data created (8 users with trip history)');
   }
+  ensureAdmin();
 }
 
 // `npm run seed` → wipe and recreate the demo data
 if (require.main === module && process.argv.includes('--reset')) {
   db.exec('DELETE FROM trips; DELETE FROM users; DELETE FROM sqlite_sequence;');
   seed();
+  ensureAdmin();
   console.log('Database reset with fresh demo data.');
 }
 
-module.exports = { seedIfEmpty, DEMO };
+module.exports = { seedIfEmpty, DEMO, ADMIN };

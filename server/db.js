@@ -16,6 +16,7 @@ db.exec(`
     name          TEXT    NOT NULL,
     email         TEXT    NOT NULL UNIQUE,
     password_hash TEXT    NOT NULL,
+    role          TEXT    NOT NULL DEFAULT 'user',
     created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
   );
 
@@ -35,5 +36,11 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_trips_user ON trips(user_id);
   CREATE INDEX IF NOT EXISTS idx_trips_date ON trips(date);
 `);
+
+// Safe migration for databases created before the admin role existed
+const userColumns = db.prepare('PRAGMA table_info(users)').all();
+if (!userColumns.some(col => col.name === 'role')) {
+  db.exec("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'");
+}
 
 module.exports = db;
